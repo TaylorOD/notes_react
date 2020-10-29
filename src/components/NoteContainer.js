@@ -1,16 +1,26 @@
-import React, { Component } from 'react'
-import NoteSelectors from './NoteSelectors'
-import NoteEditor from './NoteEditor'
+import React, { Component } from 'react';
+import NoteSelectors from './NoteSelectors';
+import NoteEditor from './NoteEditor';
 
 class NoteContainer extends Component {
   render() {
+    const selectedNote = this.props.notes.find(note => note.id === this.props.selectedNoteId);
+
     return (
       <div className="note-container">
-        <NoteSelectors />
-        <NoteEditor />
+        <NoteSelectors
+          notes={this.props.notes}
+          selectedNoteId={this.props.selectedNoteId}
+          searchText={this.props.searchText}
+          onClickNote={this.props.onClickNote}
+        />
+        <NoteEditor
+          selectedNote={selectedNote}
+          onNoteEditorChange={this.props.onNoteEditorChange}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default NoteContainer
+export default NoteContainer;
